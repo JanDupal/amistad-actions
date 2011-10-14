@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "amistad-actions"
   gem.homepage = "http://github.com/JanDupal/amistad-actions"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Amistad Action logging}
+  gem.description = %Q{Action logging for Amistad friendship model}
   gem.email = "dupal.j@gmail.com"
   gem.authors = ["Jan Dupal"]
   # dependencies defined in Gemfile
