@@ -1,17 +1,37 @@
 module Amistad
   module ActiveRecord
     module HasActions
-      def self.included(receiver)
-        receiver.class_exec do
-          include InstanceMethods
+      extend ActiveSupport::Concern
 
-          has_many :actions
+      included do
+        has_many :actions
+      end
+
+      module ClassMethods
+        def predefined_actions
+          @@predefined_actions ||= {}
+        end
+
+        def predefine_action(action, options = nil)
+          predefined_actions[action] = Action.new(options)
+        end
+
+        def has_predefined_action(action)
+          predefined_actions.has_key?(action)
+        end
+
+        def remove_all_predefined_actions
+          @@predefined_actions = {}
         end
       end
 
       module InstanceMethods
         def did(what)
-          action = Action.new(:description => what)
+          action = if what.is_a? Symbol
+                     self.class.predefined_actions[what].dup
+                   else
+                     Action.new(:description => what)
+                   end
           actions << action
           action
         end
