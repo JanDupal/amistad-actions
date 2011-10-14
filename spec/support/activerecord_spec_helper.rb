@@ -24,12 +24,14 @@ ActiveRecord::Schema.define do
   create_table :actions, :force => true do |t|
     t.integer :user_id
     t.string :description
+    t.references :subject, :polymorphic => true
   end
 end
 
 class User < ActiveRecord::Base
   include Amistad::FriendModel
   include Amistad::HasActions
+  include Amistad::IsSubject
 end
 
 class Friendship < ActiveRecord::Base

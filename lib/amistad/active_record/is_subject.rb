@@ -1,13 +1,10 @@
 module Amistad
   module ActiveRecord
-    module ActionModel
+    module IsSubject
       extend ActiveSupport::Concern
 
       included do
-        belongs_to :user
-        belongs_to :subject, :polymorphic => true
-
-        validates :user, :presence => true
+        has_many :concerning_actions, :class_name => 'Action', :as => 'subject'
       end
 
       module ClassMethods
