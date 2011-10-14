@@ -1,14 +1,16 @@
 module Amistad
   module ActiveRecord
     module ActionModel
-      def self.included(receiver)
-        receiver.class_exec do
-          include InstanceMethods
+      extend ActiveSupport::Concern
 
-          belongs_to :user
+      included do
+        belongs_to :user
 
-          validates :user, :presence => true
-        end
+        validates :user, :presence => true
+      end
+
+      module ClassMethods
+
       end
 
       module InstanceMethods
